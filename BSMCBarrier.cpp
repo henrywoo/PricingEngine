@@ -1,21 +1,6 @@
-#include <ql/time/date.hpp>
-#include <ql/instruments/barriertype.hpp>
-#include <ql/instruments/barrieroption.hpp>
-#include <ql/settings.hpp>
-#include <ql/time/calendars/target.hpp>
-#include <ql/time/daycounters/actual365fixed.hpp>
-#include <ql/exercise.hpp>
-#include <ql/quotes/simplequote.hpp>
-#include <ql/termstructures/yield/flatforward.hpp>
-#include <ql/termstructures/volatility/equityfx/blackconstantvol.hpp>
-#include <ql/instruments/payoffs.hpp>
-#include <ql/processes/blackscholesprocess.hpp>
-#include <ql/pricingengines/barrier/mcbarrierengine.hpp>
-#include <iostream>
-using namespace QuantLib;
+#include "DAOC.h"
 
-int main4(int, char*[])
-{
+Real BSMCBarrier(){
   try
   {
     Barrier::Type barrierType(Barrier::DownOut);
@@ -108,8 +93,9 @@ int main4(int, char*[])
 
     barrierOption.setPricingEngine(monteCarloEngine);
 
-    std::cout << "NPV = " << barrierOption.NPV() << std::endl;
-    return 0;
+    Real r = barrierOption.NPV();
+    std::cout << __FUNCTION__ <<", NPV = " << r << std::endl;
+    return r;
   }
   catch (std::exception& e)
   {

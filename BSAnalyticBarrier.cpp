@@ -1,25 +1,11 @@
-#include <ql/time/date.hpp>
-#include <ql/instruments/barriertype.hpp>
-#include <ql/instruments/barrieroption.hpp>
-#include <ql/settings.hpp>
-#include <ql/time/calendars/target.hpp>
-#include <ql/time/daycounters/actual365fixed.hpp>
-#include <ql/exercise.hpp>
-#include <ql/quotes/simplequote.hpp>
-#include <ql/termstructures/yield/flatforward.hpp>
-#include <ql/termstructures/volatility/equityfx/blackconstantvol.hpp>
-#include <ql/instruments/payoffs.hpp>
-#include <ql/processes/blackscholesprocess.hpp>
-#include <ql/pricingengines/barrier/analyticbarrierengine.hpp>
-#include <iostream>
+#include "DAOC.h"
 
-using namespace QuantLib;
 using namespace std;
 
 #define bsptr boost::shared_ptr
 
-int main3(int, char*[])
-{
+
+Real BSAnalyticBarrier(){
   try{
     Barrier::Type barrierType(Barrier::DownOut);
     Option::Type optionType(Option::Call);
@@ -29,7 +15,6 @@ int main3(int, char*[])
     Date maturityDate = settlementDate;
     maturityDate += 2 * Months;
     maturityDate += 12 * Days;
-    cout << maturityDate << endl;
 
     Settings::instance().evaluationDate() = todaysDate;
     Calendar calendar = TARGET();
@@ -95,8 +80,9 @@ int main3(int, char*[])
       new AnalyticBarrierEngine(
       blackScholesMertonProcess)));
 
-    std::cout << "NPV = " << barrierOption.NPV() << std::endl;
-    return 0;
+    Real r = barrierOption.NPV();
+    std::cout << __FUNCTION__ << ", NPV = " << r << std::endl;
+    return r;
   }
   catch (std::exception& e)
   {

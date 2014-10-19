@@ -1,26 +1,6 @@
-/*
-* Copyright (c) 2010 DeriveXperts.
-* Hachemi Benyahia (hachemi.benyahia@derivexperts.com)
-*/
+#include "DAOC.h"
 
-#include <ql/time/date.hpp>
-#include <ql/instruments/barriertype.hpp>
-#include <ql/instruments/barrieroption.hpp>
-#include <ql/settings.hpp>
-#include <ql/time/calendars/target.hpp>
-#include <ql/time/daycounters/actual365fixed.hpp>
-#include <ql/exercise.hpp>
-#include <ql/quotes/simplequote.hpp>
-#include <ql/termstructures/yield/flatforward.hpp>
-#include <ql/termstructures/volatility/equityfx/blackconstantvol.hpp>
-#include <ql/instruments/payoffs.hpp>
-#include <ql/processes/blackscholesprocess.hpp>
-#include <ql/pricingengines/barrier/fdblackscholesbarrierengine.hpp>
-#include <iostream>
-using namespace QuantLib;
-
-int main(int, char*[])
-{
+Real BSFDBarrier(){
   try
   {
     Barrier::Type barrierType(Barrier::DownOut);
@@ -107,8 +87,9 @@ int main(int, char*[])
       underlyingGird,
       dampingSteps)));
 
-    std::cout << "NPV = " << barrierOption.NPV() << std::endl;
-    return 0;
+    Real r = barrierOption.NPV();
+    std::cout << __FUNCTION__ << ", NPV = " << r << std::endl;
+    return r;
   }
   catch (std::exception& e)
   {

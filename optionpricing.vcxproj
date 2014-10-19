@@ -51,7 +51,11 @@
     <ClCompile Include="BSAnalyticBarrier.cpp" />
     <ClCompile Include="BSFDBarrier.cpp" />
     <ClCompile Include="BSMCBarrier.cpp" />
+    <ClCompile Include="DAOC.cpp" />
     <ClCompile Include="m.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DAOC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
